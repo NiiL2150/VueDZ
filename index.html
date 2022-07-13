@@ -1,0 +1,61 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue tasks</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div id="app" class="container">
+      <div class="row">
+        <div class="col text-center">
+          <h2 :style="[taskCount >= 10 ? { color: 'red' } : { color: 'blue' }]">
+            Task count: {{taskCount}}
+          </h2>
+        </div>
+      </div>
+      <div class="row justify-content-center align-items-center">
+        <div class="col col-3 text-center">
+          <input type="text" v-model="taskInput" />
+        </div>
+        <div class="col col-2">
+          <button class="btn btn-primary w-100" @click="addTask">
+            Add task
+          </button>
+        </div>
+      </div>
+      <ul class="row text-center">
+        <li style="display: inline-block" class="mt-4" v-for="task in tasks">
+          <h3
+            :style="[task.isMarked ? {backgroundColor: 'yellow'}: {backgroundColor: 'transparent'}, task.isSelected ? {color: 'green'} : {color: 'black'}]"
+            @click="task.isMarked = !task.isMarked"
+          >
+            {{task.value}}
+          </h3>
+          <button
+            class="btn btn-primary"
+            @click="task.isSelected = !task.isSelected"
+          >
+            Select task
+          </button>
+          <button class="btn btn-danger" @click="removeTask(task.id)">
+            Remove task
+          </button>
+        </li>
+      </ul>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
